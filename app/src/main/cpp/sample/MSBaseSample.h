@@ -13,8 +13,8 @@
 #define MS_SAMPLE_TYPE_KEY_CUBE_TEXTURE_MAP     SAMPLE_TYPE_BASE + 7
 
 
-#include "MSGLCommonDef.h"
-#include "ImageDef.h"
+#include "../MSGLCommonDef.h"
+#include "../ImageDef.h"
 
 class MSBaseSample {
 

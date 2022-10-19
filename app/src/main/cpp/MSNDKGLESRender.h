@@ -6,7 +6,7 @@
 #define MSOPENGLES2_MSNDKGLESRENDER_H
 
 #include "MSGLCommonDef.h"
-#include "MSBaseSample.h"
+#include "sample/MSBaseSample.h"
 #include <vector>
 
 class MSNDKGLESRender {

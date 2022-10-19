@@ -3,14 +3,14 @@
 //
 
 #include "MSNDKGLESRender.h"
-#include "MSBaseSample.h"
-#include "MSTextureMapSample.h"
-#include "MSTriangleSample.h"
-#include "MSLineAndPointSample.h"
-#include "MSCubeTextureSample.h"
-#include "MSRectangleSample.h"
-#include "MSCubeSample.h"
-#include "MSTextureMapCombineSample.h"
+#include "sample/MSBaseSample.h"
+#include "sample/MSTextureMapSample.h"
+#include "sample/MSTriangleSample.h"
+#include "sample/MSLineAndPointSample.h"
+#include "sample/MSCubeTextureSample.h"
+#include "sample/MSRectangleSample.h"
+#include "sample/MSCubeSample.h"
+#include "sample/MSTextureMapCombineSample.h"
 
 MSNDKGLESRender::MSNDKGLESRender() {
     LOGD("MSNDKGLESRender -----MSNDKGLESRender()")

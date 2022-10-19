@@ -7,8 +7,12 @@ set(STBIMG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/libstbImage)
 include_directories(${GLM_DIR}/include)
 include_directories(${STBIMG_DIR}/include)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/sample)
+
 #以下导入多个源文件
 file(GLOB ALL_SOURCE_FILE *.cpp *.c)
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/sample CPP_FILES)
 
 
 
@@ -16,7 +20,9 @@ file(GLOB ALL_SOURCE_FILE *.cpp *.c)
 add_library(
         msopengles
         SHARED
-       ${ALL_SOURCE_FILE})
+        ${ALL_SOURCE_FILE}
+        ${CPP_FILES}
+)
 
 
 find_library(
