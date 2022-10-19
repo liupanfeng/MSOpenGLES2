@@ -2,6 +2,7 @@ package com.meishe.msopengles2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,18 +18,17 @@ public class LaunchActivity extends AppCompatActivity {
     }
 
     private ActivityMainBinding binding;
-
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mContext=this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
     }
 
-
     public void onRenderEffectClick(View view) {
-        startActivity(new Intent(LaunchActivity.this,MSRenderEffectActivity.class));
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_TRIANGLE);
     }
 }

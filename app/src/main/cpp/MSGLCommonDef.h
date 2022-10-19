@@ -1,5 +1,22 @@
-#ifndef MSOPENGLES2_MS_PRIMITIVES_DEF_H
-#define MSOPENGLES2_MS_PRIMITIVES_DEF_H
+#ifndef MSOPENGLES2_MSGLCOMMONDEF_H
+#define MSOPENGLES2_MSGLCOMMONDEF_H
+
+
+#include <string>
+
+#include "android_log_util.h"
+#include <GLES/gl.h>
+#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
+#include "MSGLCommonDef.h"
+
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
 
 #ifdef __cplusplus
 extern "C"{
@@ -40,4 +57,4 @@ extern "C"{
 #endif
 
 
-#endif //MSOPENGLES2_MS_PRIMITIVES_DEF_H
+#endif //MSOPENGLES2_MSGLCOMMONDEF_H

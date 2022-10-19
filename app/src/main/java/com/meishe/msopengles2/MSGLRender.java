@@ -23,17 +23,17 @@ public class MSGLRender implements GLSurfaceView.Renderer {
 
     private Context mContext;
     private int[] mResourceId;
+    private int mType;
 
-
-    public MSGLRender(Context context,int[] resId){
+    public MSGLRender(Context context, int[] resId, int type) {
         mContext = context;
-        mResourceId=resId;
+        mResourceId = resId;
+        mType = type;
     }
 
 //    public void setResourceId(int resId){
 //        mResourceId=resId;
 //    }
-
 
 
     @Override
@@ -42,16 +42,25 @@ public class MSGLRender implements GLSurfaceView.Renderer {
 
 //         loadRGBABitmap(mResourceId[1]);
 
-        for (int i = 0; i < mResourceId.length; i++) {
-            int resource = mResourceId[i];
-            loadRGBABitmap2(resource);
+        jniSetParamsInt(mType, 0, 0);
+        switch (mType) {
+
+            case Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_MAP:
+                for (int i = 0; i < mResourceId.length; i++) {
+                    int resource = mResourceId[i];
+                    loadRGBABitmap2(resource);
+                }
+                jniCreateTextureIDS();
+                break;
+            default:
+                break;
         }
-        jniCreateTextureIDS();
+
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl10, int i, int i1) {
-        jniGLResize(i,i1);
+        jniGLResize(i, i1);
     }
 
     @Override
@@ -60,13 +69,11 @@ public class MSGLRender implements GLSurfaceView.Renderer {
     }
 
 
-
-
     public static final int IMAGE_FORMAT_RGBA = 0x01;
 
     private void loadRGBABitmap(int resId) {
-        Bitmap bitmap= BitmapFactory.decodeResource(mContext.getResources(),resId);
-        if (bitmap!=null){
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId);
+        if (bitmap != null) {
             int byteCount = bitmap.getByteCount();
             ByteBuffer allocate = ByteBuffer.allocate(byteCount);
             bitmap.copyPixelsToBuffer(allocate);
@@ -77,8 +84,8 @@ public class MSGLRender implements GLSurfaceView.Renderer {
     }
 
     private void loadRGBABitmap2(int resId) {
-        Bitmap bitmap= BitmapFactory.decodeResource(mContext.getResources(),resId);
-        if (bitmap!=null){
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId);
+        if (bitmap != null) {
             int byteCount = bitmap.getByteCount();
             ByteBuffer allocate = ByteBuffer.allocate(byteCount);
             bitmap.copyPixelsToBuffer(allocate);
@@ -94,16 +101,20 @@ public class MSGLRender implements GLSurfaceView.Renderer {
 
     private native void jniGLInit();
 
-    private native void jniGLResize(int width,int height);
+    private native void jniGLResize(int width, int height);
 
     private native void jniGLDraw();
 
 
-
     /*将bitmap数据 通过纹理 映射到surfaceView上*/
     public native void native_set_bitmap_data(int format, int width, int height, byte[] bytes);
+
     /*将bitmap数据 通过纹理 映射到surfaceView上*/
     public native void native_set_bitmap_data2(int format, int width, int height, byte[] bytes);
 
     public native void jniCreateTextureIDS();
+
+    public native void jniSetParamsInt(int paramType, int value0, int value1);
+
+    public native void jniDestroy();
 }

@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:onClick="onRenderEffectClick"
-        android:text="特效渲染"
+        android:text="绘制彩色三角形"
         />
 
 </LinearLayout>
