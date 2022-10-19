@@ -33,6 +33,7 @@ GLuint createOpenGLTexture2(NativeImage* pImg);
 void createTextureIDs();
 void drawCubeTextureMap();
 void drawLineAndPoint();
+void drawTextureMapCombine();
 
 float mAngle =0.0f;
 GLuint m_texID; //纹理id
@@ -83,7 +84,7 @@ Java_com_meishe_msopengles2_MSGLRender_jniGLDraw(JNIEnv *env, jobject thiz) {
 //    drawTriangleStrip();
 //    drawCube();
 //    DrawTextureMap();
-//    drawCubeTextureMap();
+    drawCubeTextureMap();
 //     drawTextureMapCombine();
 //     drawLineAndPoint();
 
