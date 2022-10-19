@@ -47,6 +47,7 @@ public class MSGLRender implements GLSurfaceView.Renderer {
 
             case Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_MAP:
             case Constants.MS_SAMPLE_TYPE_KEY_CUBE_TEXTURE_MAP:
+            case Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_COMBINE:
                 for (int i = 0; i < mResourceId.length; i++) {
                     int resource = mResourceId[i];
                     loadRGBABitmap2(resource);

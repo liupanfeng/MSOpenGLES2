@@ -24,6 +24,24 @@
         android:onClick="onRenderLineAndPoint"
         android:text="绘制线和点"
         />
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onRenderRectangle"
+        android:text="绘制彩色矩形"
+        />
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onRenderCube"
+        android:text="绘制彩色立方体"
+        />
+
 
     <Button
         android:layout_width="240dp"
@@ -39,8 +57,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
+        android:onClick="onRenderTextureMapCombine"
+        android:text="纹理合并"
+        />
+
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         android:onClick="onRenderCubeAndTextureMap"
-        android:text="绘制彩色矩形"
+        android:text="绘制带贴图的立方体"
         />
 
 </LinearLayout>

@@ -40,7 +40,20 @@ public class LaunchActivity extends AppCompatActivity {
         MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_MAP);
     }
 
+    public void onRenderRectangle(View view) {
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_RECTANGLE);
+    }
+
     public void onRenderCubeAndTextureMap(View view) {
         MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_CUBE_TEXTURE_MAP);
+    }
+
+
+    public void onRenderCube(View view) {
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_CUBE);
+    }
+
+    public void onRenderTextureMapCombine(View view) {
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_COMBINE);
     }
 }
