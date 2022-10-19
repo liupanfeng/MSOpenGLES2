@@ -15,7 +15,6 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 
-#include "ms_image.h"
 #include "ImageDef.h"
 
 #include <android/asset_manager.h>
@@ -28,7 +27,7 @@ void drawTriangleStrip();
 void drawCube();
 void DrawTextureMap();
 
-GLuint createOpenGLTexture(MSImage* pImg);
+//GLuint createOpenGLTexture(MSImage* pImg);
 GLuint createOpenGLTexture2(NativeImage* pImg);
 void createTextureIDs();
 void drawCubeTextureMap();
@@ -83,105 +82,105 @@ Java_com_meishe_msopengles2_MSGLRender_jniGLDraw(JNIEnv *env, jobject thiz) {
 
 //    drawTriangleStrip();
 //    drawCube();
-//    DrawTextureMap();
-    drawCubeTextureMap();
+    DrawTextureMap();
+//    drawCubeTextureMap();
 //     drawTextureMapCombine();
 //     drawLineAndPoint();
 
 }
 
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_meishe_msopengles2_MSGLRender_jniReadResourceFile(JNIEnv *env, jobject thiz,
-                                                           jobject assetManager,
-                                                           jstring file_name) {
-    //从java对象获取 AAssetManager
-    AAssetManager *mAssetManager= AAssetManager_fromJava(env,assetManager);
-    if (mAssetManager==nullptr){
-        LOGE("mAssetManager is null");
-        return;
-    }
+//extern "C"
+//JNIEXPORT void JNICALL
+//Java_com_meishe_msopengles2_MSGLRender_jniReadResourceFile(JNIEnv *env, jobject thiz,
+//                                                           jobject assetManager,
+//                                                           jstring file_name) {
+//    //从java对象获取 AAssetManager
+//    AAssetManager *mAssetManager= AAssetManager_fromJava(env,assetManager);
+//    if (mAssetManager==nullptr){
+//        LOGE("mAssetManager is null");
+//        return;
+//    }
+//
+//    const char* fileName= const_cast<char *>(env->GetStringUTFChars(file_name, JNI_OK));
+//    if (fileName==nullptr){
+//        LOGE("fileName is null");
+//        return;
+//    }
+//    LOGD ("FileName is %s", fileName);
+//
+//    AAsset* asset=AAssetManager_open(mAssetManager,fileName,AASSET_MODE_UNKNOWN);
+//    if (nullptr==asset){
+//        LOGE("aAsset is null");
+//        return;
+//    }
+//
+//    off_t bufferSize=AAsset_getLength(asset);
+//    LOGD("buffer size is %ld", bufferSize);
+//
+//    unsigned char* imgBuff= (unsigned char *)(malloc(bufferSize ));
+//    if (nullptr==imgBuff){
+//        LOGE("imgBuffer alloc fail");
+//        return;
+//    }
+//
+//    //memset是计算机中C/C++语言初始化函数。
+//    // 作用是将某一块内存中的内容全部设置为指定的值， 这个函数通常为新申请的内存做初始化工作。
+//    memset(imgBuff,0,bufferSize);
+//    int readLen=AAsset_read(asset,imgBuff,bufferSize);
+//    LOGD("Picture read: %d", readLen);
+//
+//    MSImage * glImage=MSImage::ReadFromBuffer(imgBuff,readLen);
+//    m_texID=createOpenGLTexture(glImage);
+//
+//    delete glImage;  //指针使用delete  char* 使用free来释放
+//    if (imgBuff){
+//        free(imgBuff);
+//        imgBuff = NULL;
+//    }
+//
+//    AAsset_close(asset);
+//    env->ReleaseStringUTFChars(file_name,fileName);
+//
+//}
 
-    const char* fileName= const_cast<char *>(env->GetStringUTFChars(file_name, JNI_OK));
-    if (fileName==nullptr){
-        LOGE("fileName is null");
-        return;
-    }
-    LOGD ("FileName is %s", fileName);
 
-    AAsset* asset=AAssetManager_open(mAssetManager,fileName,AASSET_MODE_UNKNOWN);
-    if (nullptr==asset){
-        LOGE("aAsset is null");
-        return;
-    }
-
-    off_t bufferSize=AAsset_getLength(asset);
-    LOGD("buffer size is %ld", bufferSize);
-
-    unsigned char* imgBuff= (unsigned char *)(malloc(bufferSize + 1));
-    if (nullptr==imgBuff){
-        LOGE("imgBuffer alloc fail");
-        return;
-    }
-
-    //memset是计算机中C/C++语言初始化函数。
-    // 作用是将某一块内存中的内容全部设置为指定的值， 这个函数通常为新申请的内存做初始化工作。
-    memset(imgBuff,0,bufferSize+1);
-    int readLen=AAsset_read(asset,imgBuff,bufferSize);
-    LOGD("Picture read: %d", readLen);
-
-    MSImage * glImage=MSImage::ReadFromBuffer(imgBuff,readLen);
-    m_texID=createOpenGLTexture(glImage);
-
-    delete glImage;  //指针使用delete  char* 使用free来释放
-    if (imgBuff){
-        free(imgBuff);
-        imgBuff = NULL;
-    }
-
-    AAsset_close(asset);
-    env->ReleaseStringUTFChars(file_name,fileName);
-
-}
-
-
-/**
- * 创建纹理
- * @param pImg
- * @return
- */
-GLuint createOpenGLTexture(MSImage* pImg){
-    if (NULL==pImg){
-        return -1;
-    }
-
-    GLuint textureID;
-    glEnable(GL_TEXTURE_2D);
-    glGenTextures(1,&textureID);//生成纹理ID
-    glBindTexture(GL_TEXTURE_2D,textureID);
-
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-
-    //指定参数生成纹理
-    //target 指定目标纹理，这个值必须是GL_TEXTURE_2D。
-    //level 执行细节级别。0是最基本的图像级别，n表示第N级贴图细化级别。
-    //internalformat 指定纹理中的颜色组件。可选的值有GL_ALPHA,GL_RGB,GL_RGBA,GL_LUMINANCE, GL_LUMINANCE_ALPHA 等几种。
-    //width 指定纹理图像的宽度，必须是2的n次方。纹理图片至少要支持64个材质元素的宽度
-    //height 指定纹理图像的高度，必须是2的m次方。纹理图片至少要支持64个材质元素的高度
-    //border 指定边框的宽度。必须为0。
-    // format 像素数据的颜色格式, 不需要和internalformatt取值必须相同。可选的值参考internalformat。
-    //type 指定像素数据的数据类型。可以使用的值有GL_UNSIGNED_BYTE,GL_UNSIGNED_SHORT_5_6_5,GL_UNSIGNED_SHORT_4_4_4_4,GL_UNSIGNED_SHORT_5_5_5_1。
-    // pixels 指定内存中指向图像数据的指针
-    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,pImg->GetWidth(),pImg->GetHeight(),
-                 0,GL_RGBA,GL_UNSIGNED_BYTE,pImg->GetData());
-
-    return textureID;
-}
+///**
+// * 创建纹理
+// * @param pImg
+// * @return
+// */
+//GLuint createOpenGLTexture(MSImage* pImg){
+//    if (NULL==pImg){
+//        return -1;
+//    }
+//
+//    GLuint textureID;
+//    glEnable(GL_TEXTURE_2D);
+//    glGenTextures(1,&textureID);//生成纹理ID
+//    glBindTexture(GL_TEXTURE_2D,textureID);
+//
+//    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+//
+//    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+//
+//    //指定参数生成纹理
+//    //target 指定目标纹理，这个值必须是GL_TEXTURE_2D。
+//    //level 执行细节级别。0是最基本的图像级别，n表示第N级贴图细化级别。
+//    //internalformat 指定纹理中的颜色组件。可选的值有GL_ALPHA,GL_RGB,GL_RGBA,GL_LUMINANCE, GL_LUMINANCE_ALPHA 等几种。
+//    //width 指定纹理图像的宽度，必须是2的n次方。纹理图片至少要支持64个材质元素的宽度
+//    //height 指定纹理图像的高度，必须是2的m次方。纹理图片至少要支持64个材质元素的高度
+//    //border 指定边框的宽度。必须为0。
+//    // format 像素数据的颜色格式, 不需要和internalformatt取值必须相同。可选的值参考internalformat。
+//    //type 指定像素数据的数据类型。可以使用的值有GL_UNSIGNED_BYTE,GL_UNSIGNED_SHORT_5_6_5,GL_UNSIGNED_SHORT_4_4_4_4,GL_UNSIGNED_SHORT_5_5_5_1。
+//    // pixels 指定内存中指向图像数据的指针
+//    glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,pImg->GetWidth(),pImg->GetHeight(),
+//                 0,GL_RGBA,GL_UNSIGNED_BYTE,pImg->GetData());
+//
+//    return textureID;
+//}
 
 /**
  * 创建纹理
@@ -399,7 +398,7 @@ void DrawTextureMap(){
             {1.0f,1.0f,1.0f,1,1},
     };
 
-    glBindTexture(GL_TEXTURE_2D,m_texID);
+    glBindTexture(GL_TEXTURE_2D, m_texIDs[0]);
 
     glEnableClientState(GL_VERTEX_ARRAY); //启用定点数组
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);   //启用纹理坐标数组

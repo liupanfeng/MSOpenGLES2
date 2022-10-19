@@ -10,16 +10,12 @@ extern "C"{
 }
 
 
-#ifndef U8_t
-#define U8_t unsigned char
-#endif
-
-
+//这个有兼容问题，废弃不再使用
 class MSImage
 {
 public:
 
-    MSImage(int w, int h,int type, U8_t* imgData){
+    MSImage(int w, int h,int type, uint8_t * imgData){
         m_width =w;
         m_height =h;
         m_type = type;
@@ -27,7 +23,7 @@ public:
         int imgSize = m_width * m_height * 4;
 
         if(imgSize >0 && imgData != nullptr){
-            m_pImgData =(U8_t*) malloc(imgSize);
+            m_pImgData =(uint8_t*) malloc(imgSize);
             memcpy(m_pImgData,imgData,imgSize);
         }else{
             m_pImgData = NULL;
@@ -53,8 +49,8 @@ public:
 
         //stbi_set_flip_vertically_on_load(true);
 
-        U8_t* picData = stbi_load(fileName, &width, &height, &type, STBI_rgb_alpha);
-        MSImage* image = new MSImage(width, height, type, (U8_t*)picData);
+        uint8_t* picData = stbi_load(fileName, &width, &height, &type, STBI_rgb_alpha);
+        MSImage* image = new MSImage(width, height, type, (uint8_t*)picData);
 
         stbi_image_free(picData);
 
@@ -74,8 +70,8 @@ public:
 
         stbi_set_flip_vertically_on_load(true);
 
-        U8_t* picData = stbi_load_from_memory(dataBuff, length, &width, &height, &type, 0);
-        MSImage* image = new MSImage(width, height, type, (U8_t*)picData);
+        uint8_t* picData = stbi_load_from_memory(dataBuff, length, &width, &height, &type, 0);
+        MSImage* image = new MSImage(width, height, type, (uint8_t*)picData);
 
         stbi_image_free(picData);
 
@@ -85,13 +81,13 @@ public:
     int         GetWidth() const {return m_width; }
     int         GetHeight() const { return m_height; }
     int         GetType() const {return m_type; }
-    U8_t*       GetData() const { return m_pImgData; }
+    uint8_t*       GetData() const { return m_pImgData; }
 
 private:
     int         m_width     =0;
     int         m_height    =0;
     int         m_type      =0;
-    U8_t*     m_pImgData  =NULL;
+    uint8_t*    m_pImgData  =NULL;
 
 };
 

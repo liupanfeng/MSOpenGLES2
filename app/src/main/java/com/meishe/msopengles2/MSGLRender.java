@@ -40,10 +40,8 @@ public class MSGLRender implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         jniGLInit();
 
-        //通过在JNI通过Asset读取文件
-//        AssetManager assetManager=mContext.getAssets();
-//        jniReadResourceFile(assetManager,"rabit.png");
-//         loadRGBABitmap(mResourceId[0]);
+//         loadRGBABitmap(mResourceId[1]);
+
         for (int i = 0; i < mResourceId.length; i++) {
             int resource = mResourceId[i];
             loadRGBABitmap2(resource);
@@ -100,7 +98,6 @@ public class MSGLRender implements GLSurfaceView.Renderer {
 
     private native void jniGLDraw();
 
-    private native void jniReadResourceFile(AssetManager assetManager,String fileName);
 
 
     /*将bitmap数据 通过纹理 映射到surfaceView上*/
