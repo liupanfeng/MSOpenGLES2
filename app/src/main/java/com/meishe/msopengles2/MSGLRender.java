@@ -46,12 +46,14 @@ public class MSGLRender implements GLSurfaceView.Renderer {
         switch (mType) {
 
             case Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_MAP:
+            case Constants.MS_SAMPLE_TYPE_KEY_CUBE_TEXTURE_MAP:
                 for (int i = 0; i < mResourceId.length; i++) {
                     int resource = mResourceId[i];
                     loadRGBABitmap2(resource);
                 }
                 jniCreateTextureIDS();
                 break;
+
             default:
                 break;
         }

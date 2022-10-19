@@ -31,4 +31,16 @@ public class LaunchActivity extends AppCompatActivity {
     public void onRenderEffectClick(View view) {
         MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_TRIANGLE);
     }
+
+    public void onRenderLineAndPoint(View view) {
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_LINE);
+    }
+
+    public void onRenderTextureMap(View view) {
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_TEXTURE_MAP);
+    }
+
+    public void onRenderCubeAndTextureMap(View view) {
+        MSRenderEffectActivity.startMSRenderEffectActivity(mContext,Constants.MS_SAMPLE_TYPE_KEY_CUBE_TEXTURE_MAP);
+    }
 }

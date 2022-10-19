@@ -142,49 +142,7 @@ Java_com_meishe_msopengles2_MSGLRender_jniDestroy(JNIEnv *env, jobject thiz) {
 }
 
 
-/**
- * 绘制线和点  包含平滑的使用 以及平滑采样等
- */
-void drawLineAndPoint(){
-    MSFloat7 vertexTriangle[]={
-            {-0.5f,-0.5f,-1,1.0f,0.0f,0.0f,1.0f},
-            {-0.5f,0.5f,-1,0.0f,1.0f,0.0f,1.0f},
-            {0.5f,0.5f,-1,1.0f,0.0f,0.0f,1.0f},
-            {0.5f,-0.5f,-1,0.0f,0.0f,1.0f,1.0f},
-    };
 
-//    glColor4f(0.0f,0.0f,1.0f,1.0f);
-
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3,GL_FLOAT,sizeof (MSFloat7),vertexTriangle);
-
-    glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(4,GL_FLOAT,sizeof (MSFloat7),&vertexTriangle[0].r);
-
-    glLineWidth(12);
-    glEnable(GL_LINE_SMOOTH);
-    glHint(GL_LINE_SMOOTH_HINT,GL_NICEST);  //最好的的平滑方式
-
-    glDrawArrays(GL_LINE_LOOP,0,4); //绘制线
-
-    //开启点抗锯齿
-    glPointSize(40);
-    glEnable(GL_POINT_SMOOTH);
-    glHint(GL_POINT_SMOOTH_HINT,GL_NICEST); //点如果不开启平滑就变成矩形了，  开启平滑是原点
-
-    glDrawArrays(GL_POINTS,0,4); //绘制点
-
-    glDisableClientState(GL_VERTEX_ARRAY);
-}
-
-/**
- * 绘制彩色三角形
- */
-void drawTriangle(){
-
-
-
-}
 
 /**
  * 绘制彩色矩形

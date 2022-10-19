@@ -8,12 +8,39 @@
     tools:context=".LaunchActivity">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:onClick="onRenderEffectClick"
         android:text="绘制彩色三角形"
+        />
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onRenderLineAndPoint"
+        android:text="绘制线和点"
+        />
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onRenderTextureMap"
+        android:text="纹理贴图"
+        />
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onRenderCubeAndTextureMap"
+        android:text="绘制彩色矩形"
         />
 
 </LinearLayout>

@@ -6,6 +6,8 @@
 #include "MSBaseSample.h"
 #include "MSTextureMapSample.h"
 #include "MSTriangleSample.h"
+#include "MSLineAndPointSample.h"
+#include "MSCubeTextureSample.h"
 
 MSNDKGLESRender::MSNDKGLESRender() {
     LOGD("MSNDKGLESRender -----MSNDKGLESRender()")
@@ -21,24 +23,24 @@ MSNDKGLESRender::~MSNDKGLESRender() {
 
     if (m_imageArray){
         delete m_imageArray;
-        m_imageArray== nullptr;
+        m_imageArray= nullptr;
     }
 }
 
 void MSNDKGLESRender::SetParamsInt(int paramType, int value0, int value1) {
 
-//    if (paramType == MS_SAMPLE_TYPE_KEY_TRIANGLE) {
-//        m_msBaseSample=new MSTriangleSample();
-//    } else if (paramType == MS_SAMPLE_TYPE_KEY_TEXTURE_MAP){
-//        m_msBaseSample = new MSTextureMapSample();
-//    }
-
     switch (paramType) {
         case MS_SAMPLE_TYPE_KEY_TRIANGLE:
             m_msBaseSample=new MSTriangleSample();
             break;
+        case MS_SAMPLE_TYPE_KEY_LINE:
+            m_msBaseSample =new MSLineAndPointSample();
+            break;
         case MS_SAMPLE_TYPE_KEY_TEXTURE_MAP:
             m_msBaseSample = new MSTextureMapSample();
+            break;
+        case MS_SAMPLE_TYPE_KEY_CUBE_TEXTURE_MAP:
+            m_msBaseSample = new MSCubeTextureSample();
             break;
     }
 }
