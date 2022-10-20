@@ -15,6 +15,7 @@
 
 #include "../MSGLCommonDef.h"
 #include "../ImageDef.h"
+#include "../MSOpenGLShader.h"
 
 class MSBaseSample {
 
@@ -27,9 +28,10 @@ public:
     }
     virtual void PaintGL(GLuint m_texIDs[6]) = 0;
     virtual void Destroy() = 0;
-
 public:
     float mAngle =0.0f;
+    AAssetManager *m_AssetManager;
+    MSOpenGLShader *m_msOpenGlShader;
 };
 
 

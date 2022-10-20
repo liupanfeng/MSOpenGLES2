@@ -12,7 +12,7 @@
 #include "sample/MSCubeSample.h"
 #include "sample/MSTextureMapCombineSample.h"
 
-MSNDKGLESRender::MSNDKGLESRender() {
+MSNDKGLESRender::MSNDKGLESRender():m_pAssetManager(NULL) {
     LOGD("MSNDKGLESRender -----MSNDKGLESRender()")
     m_imageArray = new std::vector<NativeImage>();
 }
@@ -28,6 +28,8 @@ MSNDKGLESRender::~MSNDKGLESRender() {
         delete m_imageArray;
         m_imageArray= nullptr;
     }
+
+
 }
 
 void MSNDKGLESRender::SetParamsInt(int paramType, int value0, int value1) {
@@ -55,6 +57,7 @@ void MSNDKGLESRender::SetParamsInt(int paramType, int value0, int value1) {
             m_msBaseSample=new MSTextureMapCombineSample();
             break;
     }
+    m_msBaseSample->m_AssetManager=m_pAssetManager;
 }
 
 void MSNDKGLESRender::InitGL() {
@@ -177,6 +180,18 @@ void MSNDKGLESRender::onDestroy() {
         delete m_msBaseSample;
         m_msBaseSample= nullptr;
     }
+
+}
+
+void MSNDKGLESRender::SetupAssetManager(AAssetManager *pManager) {
+    if(pManager == NULL){
+        return;
+    }
+    m_pAssetManager = pManager;
+}
+
+void MSNDKGLESRender::loadShaderResources(AAssetManager *pManager) {
+
 }
 
 

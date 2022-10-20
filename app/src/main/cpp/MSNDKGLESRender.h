@@ -26,7 +26,11 @@ public:
 
     void onDestroy();
 
+    void SetupAssetManager(AAssetManager *pManager);
+    void loadShaderResources(AAssetManager *pManager);
+
 private:
+    AAssetManager *m_pAssetManager;
     MSBaseSample *m_msBaseSample;
     float m_angle =0.0f;
     GLuint m_texIDs[6];

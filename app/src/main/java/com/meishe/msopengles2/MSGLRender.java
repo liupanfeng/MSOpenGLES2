@@ -38,7 +38,8 @@ public class MSGLRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-        jniGLInit();
+        AssetManager assetManager = mContext.getAssets();
+        jniGLInit(assetManager);
 
 //         loadRGBABitmap(mResourceId[1]);
 
@@ -102,7 +103,7 @@ public class MSGLRender implements GLSurfaceView.Renderer {
         System.loadLibrary("msopengles");
     }
 
-    private native void jniGLInit();
+    private native void jniGLInit(AssetManager assetManager);
 
     private native void jniGLResize(int width, int height);
 

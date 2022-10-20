@@ -8,7 +8,6 @@
 #include <GLES/gl.h>
 #include <GLES2/gl2.h>
 #include <GLES3/gl3.h>
-#include "MSGLCommonDef.h"
 
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
@@ -17,6 +16,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
+
+#include <assert.h>
+#include <android/asset_manager_jni.h>
+#include <android/asset_manager.h>
 
 #ifdef __cplusplus
 extern "C"{

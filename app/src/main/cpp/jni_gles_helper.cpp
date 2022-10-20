@@ -46,9 +46,15 @@ GLuint m_texIDs[6];
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_meishe_msopengles2_MSGLRender_jniGLInit(JNIEnv *env, jobject thiz) {
+Java_com_meishe_msopengles2_MSGLRender_jniGLInit(JNIEnv *env, jobject thiz,jobject assetManager) {
     LOGD("jniGLInit------");
+
     m_msNDKGLESRender=new MSNDKGLESRender();
+    AAssetManager *astManager = AAssetManager_fromJava (env, assetManager);
+    if (NULL != astManager){
+        m_msNDKGLESRender->SetupAssetManager(astManager);
+    }
+
     m_msNDKGLESRender->InitGL();
 }
 extern "C"
