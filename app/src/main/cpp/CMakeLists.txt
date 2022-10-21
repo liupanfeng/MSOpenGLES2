@@ -36,5 +36,5 @@ target_link_libraries(
         android
         GLESv1_CM
         GLESv2
-        GLESv3
+#        GLESv3
         ${log-lib})

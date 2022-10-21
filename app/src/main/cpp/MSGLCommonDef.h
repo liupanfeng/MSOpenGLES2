@@ -7,7 +7,7 @@
 #include "android_log_util.h"
 #include <GLES/gl.h>
 #include <GLES2/gl2.h>
-#include <GLES3/gl3.h>
+//#include <GLES3/gl3.h>
 
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
